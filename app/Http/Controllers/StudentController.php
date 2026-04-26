@@ -23,7 +23,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-         return view('student.create', ['title' => 'Create student']);
+            return view('student.create', ['title' => 'Create student']);
     }
 
     /**
@@ -32,20 +32,19 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-        'name' => 'required|max:255',
-        'nim' => 'required|digits:11|numeric',
-    ],
-    [
-        'name.required' => 'Nama Wajib diisi',
-        'name.max' => 'Nama maksimal 255 karakter',
-        'nim.required' => 'NIM Wajib diisi',
-        'nim.digits' => 'NIM harus 11 digit',
-        'nim.numeric' => 'NIM harus berupa angka',
-    ]);
+            'name' => 'required|max:255',
+            'nim' => 'required|digits:11|numeric',
+        ], [
+            'name.required' => 'Nama Wajib diisi',
+            'name.max' => 'Nama maksimal 255 karakter',
+            'nim.required' => 'NIM Wajib diisi',
+            'nim.digits' => 'NIM harus 11 digit',
+            'nim.numeric' => 'NIM harus berupa angka',
+        ]);
         Student::create($validated);
         return to_route('student.index')->withSuccess('Data berhasil ditambahkan');
- 
-    return redirect('/student');
+
+        return redirect('/student');
     }
 
     /**

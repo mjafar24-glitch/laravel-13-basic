@@ -9,7 +9,7 @@
     <form action="{{ route('lecturer.destroy', $lecturer) }}" method="POST" class="d-inline">
       @method('DELETE')
       @csrf
-       <a href="{{ route('student.edit', $lecturer) }}" class="btn btn-warning  ">Edit</a>
+       <a href="{{ route('lecturer.edit', $lecturer) }}" class="btn btn-warning  ">Edit</a>
       <button type="submit" class="btn btn-danger " onclick="return confirm('Anda Yakin')">Delete</button>
     </form>
    </li>
