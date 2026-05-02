@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,4 +21,16 @@ class Lecturer extends Model
     {
         return $this->belongsTo(Department::class);
     }
+    #[Scope]
+    protected function filter(Builder $query, array $filters): void
+    {
+    $query
+        ->when($filters['keyword'] ?? false, function ($query, $keyword) {
+            return $query->where('name', 'like', '%'.$keyword.'%');
+        })
+        ->when($filters['department_id'] ?? false, function ($query, $department) {
+            return $query->where('department_id',$department);
+        });
+    }
+    
 }
